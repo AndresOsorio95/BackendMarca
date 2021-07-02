@@ -1,0 +1,68 @@
+{% block js %}
+<script>
+    function eliminarSeccion(uuid) {
+        console.log(uuid)
+        Swal.fire({
+            "title": "¿Esta seguro?",
+            "text": "Esta acción no se puede deshacer.",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonTest": "Si, Eliminar",
+            "reverseButtons": true
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/marca/secciones/eliminar/" + uuid + "/"
+                } else {
+                    Swal.fire({
+                        "title": "Ok",
+                        "text": "Su registro está seguro",
+                        "icon": "success"
+                    })
+                }
+            })
+    }
+</script>
+{% endblock %}
+<div class="panel shadow">
+    <div class="header">
+        <h2 class="title">
+            <i class="far fa-folder"></i> Secciones
+        </h2>
+    </div>
+    <div class="inside">
+        <table class="table table-fixed table-fixed-601">
+            <thead>
+                <tr style="width: 821px;">
+                    <th style="width: 246px;">Nombre</th>
+                    <th style="width: 460px;">Descripción</th>
+                    <th style="width: 115px;">*</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for seccion in secciones%}
+                <tr style="width: 806px;">
+                    <td style="width: 246px;"><i class="{{ seccion.icono }}"></i> {{ seccion.nombre }}</td>
+                    <td style="width: 460px;">
+                        {{ seccion.descripcion }}
+                    </td>
+                    <td>
+                        <div class="opts-table">
+                            <a href="{% url 'admin_seccion_modificar' seccion.uuid %}" data-toggle="tooltip"
+                                data-placement="top" title="Modificar registro">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            &nbsp;
+                            <a onclick="eliminarSeccion('{{ seccion.uuid }}')" data-toggle="tooltip"
+                                data-placement="top" title="Eliminar registro">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

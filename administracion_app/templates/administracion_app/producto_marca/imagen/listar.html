@@ -1,0 +1,31 @@
+{% load static %}
+{% if imagens %}
+<div class="panel shadow mtop16">
+    <div class="header">
+        <h2 class="title"><i class="far fa-images"></i> Imagenes</h2>
+    </div>
+    <div class="inside">
+        <div class="row">
+            {% for imagen in imagens %}
+            <div class="col-md-4">
+                <div class="card text-end" style="width: 18rem;">
+                    <div class="card-body">
+                        {% if imagen.imagen %}
+                        <img src="{{ imagen.imagen.url }}" class="card-img-top" alt="...">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="opts">
+                            <a href="{% url 'admin_producto_bodega_marca_eliminar' imagen.uuid %}" data-toggle="tooltip"
+                                aria-disabled="true" data-placement="top" title="Remover imagen.">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

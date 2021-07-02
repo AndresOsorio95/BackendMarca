@@ -1,0 +1,93 @@
+{% extends 'administracion_app/producto_bodega/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block js %}
+<script src="{% static 'administracion_app/lib/moment-2.25.3/moment.js' %}"></script>
+<script src="{% static 'administracion_app/lib/daterangepicker-3.1/spanish.js' %}"></script>
+<script src="{% static 'administracion_app/lib/daterangepicker-3.1/daterangepicker.js' %}"></script>
+<link rel="stylesheet" href="{% static 'administracion_app/lib/daterangepicker-3.1/daterangepicker.css' %}" />
+<script src="{% static 'administracion_app/js/report.js' %}"></script>
+{% endblock %}
+{% block complemento_barra_superior %}
+<a href="{% url 'reporte_bodega' %}">
+    <i class="fas fa-file-alt"></i> Reporte bodega/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="opts">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Descargar reporte en formato Excel">
+                <i class="far fa-file-excel"></i> Excel
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Descargar reporte en formato PDF">
+                <i class="far fa-file-pdf"></i> PDF
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Descargar reporte en formato PDF">
+                <i class="far fa-file-pdf"></i> CSV
+            </a>
+        </div>
+    </div>
+</div>
+<div class="panel shadow mtop9">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fa-file-alt"></i> Reporte bodega
+        </h2>
+    </div>
+    <div class="inside">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% include "administracion_app/form_report.html" %}
+                    </div>
+                </div>
+                <div class="container-scroll">
+                    <div class="scroll-report row">
+                        <div>
+                            <table class="table ">
+                                <tr>
+                                    <th>Referencia</th>
+                                    <th>Producto</th>
+                                    <th>Proveedor</th>
+                                    <th>Bodega</th>
+                                    <th>Costo</th>
+                                    <th>Costo unitario</th>
+                                    <th>Cantida ingresada</th>
+                                    <th>Cantidad disponible</th>
+                                    <th>Cantidad minima permitida</th>
+                                    <th>Talla</th>
+                                    <th>Color</th>
+                                    <th>Estado</th>
+                                    <th>Informacion</th>
+                                </tr>
+                                <tbody>
+                                    {% for p in productos %}
+                                    <tr>
+                                        <td>{{p.pb_referencia}}</td>
+                                        <td>{{p.pb_nombre}}</td>
+                                        <td>{{p.pb_proveedor}}</td>
+                                        <td>{{p.pb_bodega}}</td>
+                                        <td>{{p.pb_costo}}</td>
+                                        <td>{{p.pb_costo_u}}</td>
+                                        <td>{{p.pb_cantidad}}</td>
+                                        <td>{{p.pb_disponible}}</td>
+                                        <td>{{p.pb_stop}}</td>
+                                        <td>{{p.talla}}</td>
+                                        <td>{{p.color}}</td>
+                                        <td>{{p.estado}}</td>
+                                        <td>{{p.informacion}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

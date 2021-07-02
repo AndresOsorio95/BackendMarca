@@ -1,0 +1,43 @@
+{% extends 'administracion_app/coleccion/base.html' %}
+{% block contenedor %}
+<div class="row mtop16">
+    <div class="col-md-4">
+        <div class="opts">
+            <a href="{% url 'admin_coleccion_agregar' %}" data-toggle="tooltip" data-placement="top"
+                title="Agregar un nuevo coleccion">
+                <i class="fas fa-plus"></i> Agregar nueva coleccion
+            </a>
+        </div>
+    </div>
+</div>
+<div class="panel shadow mtop16">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fa-boxes"></i> Colecciones
+        </h2>
+    </div>
+    <div class="inside">
+        {% include "administracion_app/search.html" %}
+        <div class="container-scroll">
+            <div class="scroll row">
+                {% for coleccion in colecciones %}
+                <div class="col-md-3">
+                    <div class="card mtop16" style="width: 18rem;">
+                        <div class="card-header">
+                            <a class="abscess-register" href="{% url 'admin_coleccion_modificar' coleccion.uuid %}"
+                                data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                <i class="{{ coleccion.icono }}"></i> {{ coleccion.nombre }}
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ coleccion.descripcion}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

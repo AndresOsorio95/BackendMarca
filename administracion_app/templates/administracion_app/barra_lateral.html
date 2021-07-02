@@ -1,0 +1,62 @@
+{% load static %}
+<div class="sidebar shadow">
+    <div class="section-top">
+        <div class="logo">
+            <img src="{% static 'administracion_app/img/logoMarca.png' %}" alt="logo" class="img-fluid" />
+        </div>
+        <div class="user">
+            {% if user.is_authenticated %}
+            <span class="subtitle">Hola</span>
+            <div class="name">
+                @{{user.username}} <br>
+                {{user.first_name}} {{ user.last_name }}
+                <div class="email">{{user.email}}</div>
+            </div>
+            <a href="{% url 'logout' %}" data-toggle="tooltip" data-placement="top" title="Salir">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+            {% else %}
+            <li><a href="{% url 'registro' %}">Registrarce</a></li>
+            <li><a href="{% url 'login' %}">Ingresar</a></li>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="main">
+        <ul>
+            <li>
+                <a href="{% url 'admin_inicio' %}"><i class="fas fa-home"></i> Inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_bodega_inicio' %}">
+                    <i class="fas fa-store"></i> Bodegas
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin_proveedor_inicio' %}">
+                    <i class="fas fa-handshake"></i> Proveedores
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin_seccion_inicio' %}">
+                    <i class="far fa-folder"></i> Secciones
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin_coleccion_inicio' %}">
+                    <i class="fas fa-boxes"></i> Colecciones
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin_producto_bodega_inicio' %}">
+                    <i class="fas fa-dolly"></i> Ingresar mercancí
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'admin_producto_marca_inicio' %}">
+                    <i class="fas fa-box-open"></i> Productos MARCA
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

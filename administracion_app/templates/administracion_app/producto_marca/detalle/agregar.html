@@ -1,0 +1,57 @@
+{% extends 'administracion_app/producto_marca/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_producto_bodega_marca_agregar' producto_marca.uuid %}">
+    <i class="fas fa-plus"></i> Registrar articulo en el inventario/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-3">{% include 'administracion_app/producto_marca/producto/producto_marca.html' %}</div>
+    <div class="col-md-9">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title">
+                    <i class="fas fas fa-dolly"></i> Mercancí ingresada
+                </h2>
+            </div>
+            <div class="inside">
+                {% include "administracion_app/search.html" %}
+                <div class="row">
+                    <div class="container">
+                        <table class="table table-fixed table-fixed-200">
+                            <thead>
+                                <tr>
+                                    <th style="width: 400px;">Nombre</th>
+                                    <th style="width: 247px;">Bodega</th>
+                                    <th style="width: 232px;">Proveedor</th>
+                                    <th style="width: 51px;">*</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for producto_bodega in producto_bodegas %}
+                                <tr style="width: 915px;">
+                                    <td style="width: 400px;">{{producto_bodega}}</td>
+                                    <td style="width: 247px;">{{producto_bodega.bodega}}</td>
+                                    <td style="width: 232px;">{{producto_bodega.proveedor}}</td>
+                                    <td  style="width: 36px;">
+                                        <div class="opts-table">
+                                            <a title="Agregar articulo"
+                                                href="{% url 'admin_producto_bodega_marca_agregar_detalle' producto_bodega.uuid producto_marca.uuid %}"><i
+                                                    class="fas fa-plus"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% include 'administracion_app/producto_marca/detalle/listar.html' %}
+    </div>
+</div>
+{% endblock %}

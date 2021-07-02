@@ -1,0 +1,56 @@
+{% extends 'administracion_app/producto_bodega/base.html' %}
+{% load humanize %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_producto_bodega_detalle_listar_talla' producto_bodega.uuid %}">
+    <i class="fas fa-check"></i> Registro en inventario/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-4 ">
+        {% include 'administracion_app/producto_bodega/producto/producto_bodega.html' %}
+    </div>
+    <div class="col-md-4 ">
+        {% include 'administracion_app/producto_bodega/detalle/listar_agregar.html' %}
+    </div>
+    <div class="col-md-4 ">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title"><i class="fas fa-ruler"></i> Aticulos por talla</h2>
+            </div>
+            <div class="inside">
+                <div class="opts">
+                    <a href="{% url 'admin_producto_bodega_detalle_listar_talla' producto_bodega.uuid %}" data-toggle="tooltip" data-placement="top"
+                        title="Agregar un nuevo seccion">
+                        <i class="fas fa-ruler"></i> Talla
+                    </a>
+                    <a href="{% url 'admin_producto_bodega_detalle_listar_color' producto_bodega.uuid %}" data-toggle="tooltip" data-placement="top"
+                        title="Agregar un nuevo seccion">
+                        <i class="fas fa-paint-brush"></i> Color
+                    </a>
+                    <a href="{% url 'admin_producto_bodega_detalle_listar_estado' producto_bodega.uuid %}" data-toggle="tooltip" data-placement="top"
+                        title="Agregar un nuevo seccion">
+                        <i class="far fa-calendar-check"></i> Estado
+                    </a>
+                </div>
+                <table class="table  table-fixed table-fixed-558">
+                    <thead>
+                        <tr>
+                            <th style="width: 82px;">Talla</th>
+                            <th style="width: 300px;">Cantidad disponible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in detalles_talla %}
+                        <tr style="width: 377px;">
+                            <td style="width: 90px;">{{d.talla}}</td>
+                            <td style="width: 278px;">{{d.cantidad}} Unds.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

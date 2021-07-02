@@ -1,0 +1,1 @@
+from .producto_marca import ProductoMarcaSerializer, GetShortProductoMarcaSerializer, GetLiteProductoMarcaSerializer, SaveProductoMarcaSerializer

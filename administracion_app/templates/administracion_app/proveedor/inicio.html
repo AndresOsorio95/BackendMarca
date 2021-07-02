@@ -1,0 +1,100 @@
+{% extends 'administracion_app/proveedor/base.html' %}
+{% load humanize %}
+{% block js %}
+<script>
+    function eliminarProveedor(uuid) {
+        console.log(uuid)
+        Swal.fire({
+            "title": "¿Esta seguro?",
+            "text": "Esta acción no se puede deshacer.",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonTest": "Si, Eliminar",
+            "reverseButtons": true
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/marca/proveedores/eliminar/" + uuid + "/"
+                } else {
+                    Swal.fire({
+                        "title": "Ok",
+                        "text": "Su registro está seguro",
+                        "icon": "success"
+                    })
+                }
+            })
+    }
+</script>
+{% endblock %}
+{% block contenedor %}
+<div class="row mtop16">
+    <div class="col-md-4">
+        <div class="opts">
+            <a href="{% url 'admin_proveedor_agregar' %}" data-toggle="tooltip" data-placement="top"
+                title="Agregar un nuevo proveedor">
+                <i class="fas fa-plus"></i> Agregar nuevo proveedor
+            </a>
+        </div>
+    </div>
+</div>
+<div class="panel shadow mtop16">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fa-handshake"></i> Proveedores
+        </h2>
+    </div>
+    <div class="inside">
+        <form method="GET">
+            <div id="sustom-search-imput">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Que estas buscando" id="name" name="buscar"
+                        value="{{ request.GET.buscar }}">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <div class="container-scroll">
+            <div class="scroll row">
+                {% for proveedor in proveedores %}
+                <div class="col-md-4">
+                    <div class="card mtop16">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a class="abscess-register"
+                                        href="{% url 'admin_proveedor_modificar' proveedor.uuid %}"
+                                        title="Ver en detalle y modificar {{proveedor}}">
+                                        <h5>{{proveedor}}</h5>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-md-6">
+                                        <div class="opts">
+                                            <a onclick="eliminarProveedor('{{ proveedor.uuid }}')" data-toggle="tooltip"
+                                                data-placement="top" title="Eliminar registro">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6>Dirección: </h6>
+                            <p>{{ proveedor.direccion }}</p>
+                            <h6 class="mtop16">Telefono: </h6>
+                            <p>{{ proveedor.numero_telefonico}}</p>
+                            <h6 class="mtop16">correo: </h6>
+                            <p>{{ proveedor.correo_electronico }}</p>
+                            <h6>Descripción: </h6>
+                            <p>{{ proveedor.descripcion }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

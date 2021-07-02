@@ -1,0 +1,86 @@
+{% extends 'administracion_app/producto_bodega/base.html' %}
+{% block contenedor %}
+<div class="row mtop16">
+    <div class="col-md-4">
+        <div class="opts">
+            <a href="{% url 'admin_producto_bodega_agregar' %}" data-toggle="tooltip" data-placement="top"
+                title="Agregar un nuevo seccion">
+                <i class="fas fa-plus"></i> Registrar ingreso de mercancía
+            </a>
+            <a href="{% url 'admin_producto_bodega_reporte' %}" data-toggle="tooltip" data-placement="top"
+                title="Agregar un nuevo seccion">
+                <i class="fas fa-plus"></i> Reportes
+            </a>
+
+            <a href="{% url 'report-pb' %}" data-toggle="tooltip" data-placement="top" title="Generar reportes">
+                <i class="fas fa-file-alt"></i></i> Reportes
+            </a>
+        </div>
+    </div>
+</div>
+<div class="panel shadow mtop16">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fas fa-dolly"></i> Mercancí ingresada
+        </h2>
+    </div>
+    <div class="inside">
+        {% include "administracion_app/search.html" %}
+        <div class="row">
+            <div class="container">
+                <table class="table table-fixed table-fixed-500">
+                    <thead>
+                        <tr>
+                            <th style="width: 469px;">Nombre</th>
+                            <th style="width: 276px;">Bodega</th>
+                            <th style="width: 276px;">Proveedor</th>
+                            <th style="width: 184px;">Estado</th>
+                            <th style="width: 50px;">*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pb in producto_bodegas%}
+                        <tr style="width: 1244px;">
+                            <td style="width: 469px;">
+                                <a class="abscess-register"
+                                    href="{% url 'admin_producto_bodega_detalle_listar_talla' pb.uuid %}"
+                                    title="Ver en detalle {{pb.nombre}}">
+                                    {{pb}}
+                                </a>
+                            </td>
+                            <td style="width: 276px;">{{pb.bodega}}</td>
+                            <td style="width: 276px;">{{pb.proveedor}}</td>
+                            <td style="width: 184px;">
+                                {% if pb.is_relacionado %}
+                                Disponible
+                                {% else %}
+                                No inventariado
+                                {% endif %}
+                            </td>
+                            <td style="width: 35px;">
+                                <div>
+                                    <div class="opts-table">
+                                        {% if pb.is_relacionado %}
+                                        <a href="{% url 'admin_producto_bodega_detalle_listar_talla' pb.uuid %}"
+                                            data-toggle="tooltip" aria-disabled="true" data-placement="top"
+                                            title="Inventariado">
+                                            <i class="fas fa-check"></i>
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'admin_producto_bodega_detalle_agregar' pb.uuid %}"
+                                            data-toggle="tooltip" data-placement="top" title="Registrar inventario">
+                                            <i class="fas fa-tasks"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

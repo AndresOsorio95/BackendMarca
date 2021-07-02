@@ -1,0 +1,31 @@
+{% load humanize %}
+<div class="card panel shadow">
+    <div class="card-header">
+        <i class="fas fa-box-open"></i> {{producto_marca.nombre}}
+        <p>Ref: {{producto_marca.referencia}}</p>
+    </div>
+    <div class="card-body">
+        <h5>Sección:</h5>
+        <p>{{producto_marca.seccion}}</p>
+        <h5>Coleccion:</h5>
+        <p>{{producto_marca.coleccion}}</p>
+        <h5>Costo:</h5>
+        <p>${{producto_marca.costo | intcomma}}</p>
+        <h5>Precio:</h5>
+        <p>${{producto_marca.precio | intcomma}}</p>
+        <h5>Utilidad:</h5>
+        <p>${{producto_marca.utilidad | intcomma}}</p>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Descuento:</h5>
+                <p>{{producto_marca.descuento}}%</p>
+            </div>
+            <div class="col-md-6">
+                <h5>A partir de:</h5>
+                <p>{{producto_marca.descuento}} Unds.</p>
+            </div>
+        </div>
+        <h5>Descripcion:</h5>
+        <p>{{producto_marca.descripcion}}</p>
+    </div>
+</div>

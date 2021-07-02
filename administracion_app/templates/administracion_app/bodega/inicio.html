@@ -1,0 +1,104 @@
+{% extends 'administracion_app/bodega/base.html' %}
+{% load humanize %}
+{% block js %}
+<script>
+    function eliminarBodega(uuid) {
+        console.log(uuid)
+        Swal.fire({
+            "title": "¿Esta seguro?",
+            "text": "Esta acción no se puede deshacer.",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonTest": "Si, Eliminar",
+            "reverseButtons": true
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/marca/bodegas/eliminar/" + uuid + "/"
+                } else {
+                    Swal.fire({
+                        "title": "Ok",
+                        "text": "Su registro está seguro",
+                        "icon": "success"
+                    })
+                }
+            })
+    }
+</script>
+{% endblock %}
+{% block contenedor %}
+<div class="row mtop16">
+    <div class="col-md-4">
+        <div class="opts">
+            <a href="{% url 'admin_bodega_agregar' %}" data-toggle="tooltip" data-placement="top"
+                title="Agregar una nueva bodega">
+                <i class="fas fa-plus"></i> Agregar nueva bodega
+            </a>
+            <a href="{% url 'reporte_bodega' %}" data-toggle="tooltip" data-placement="top" title="Generar reportes">
+                <i class="fas fa-file-alt"></i></i> Reportes
+            </a>
+        </div>
+    </div>
+</div>
+<div class="panel shadow mtop16">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fa-store"></i> Bodegas
+        </h2>
+    </div>
+    <div class="inside">
+        {% include "administracion_app/search.html" %}
+        <div class="container-scroll">
+            <div class="scroll row">
+                {% for bodega in bodegas %}
+                <div class="col-md-4">
+                    <div class="card  mtop16">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a class="abscess-register" href="{% url 'admin_bodega_modificar' bodega.uuid %}"
+                                        title="Ver en detalle y modificar {{bodega}}">
+                                        <h5>{{bodega}}</h5>
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="col-md-6">
+                                        <div class="opts">
+                                            <a onclick="eliminarBodega('{{ bodega.uuid }}')" data-toggle="tooltip"
+                                                data-placement="top" title="Eliminar registro">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>Direccion: </h6>{{ bodega.direccion }}
+                                    <h6 class="mtop16">Telefono: </h6>{{ bodega.numero_telefonico}}
+                                    <h6 class="mtop16">Correo: </h6>{{ bodega.correo_electronico }}
+                                    <h6 class="mtop16">Capacidad: </h6>
+                                    <div class="progress"
+                                        title="Capacidad maxima: {{ bodega.capacidad_maxima | intcomma }}Unds. - Capacidad disponible: {{ bodega.capacidad_disponible | intcomma }}Unds. - Porcentaje disponible: {{ bodega.p_disponible }}%.">
+                                        <div class="progress-bar" role="progressbar"
+                                            style="width: {{ bodega.p_ocupado }}%"
+                                            aria-valuenow="{{ bodega.p_ocupado }}" aria-valuemin="0" aria-valuemax="100"
+                                            title="Capacidad ocupada: {{ bodega.c_ocupada | intcomma }}Unds. - Porcentaje ocupado: {{ bodega.p_ocupado }}%.">
+                                            {{ bodega.p_ocupado }}%</div>
+                                    </div>
+                                    <h6 class="mtop16">Descripción: </h6>
+                                    <p>{{ bodega.descripcion }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

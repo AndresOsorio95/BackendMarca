@@ -1,0 +1,32 @@
+{% extends 'administracion_app/producto_bodega/base.html' %}
+{% load crispy_forms_tags %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_producto_bodega_agregar' %}">
+    <i class="fas fa-plus"></i> Registrar ingreso de mercanciá/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title"><i class="fas fa-plus"></i> Registrar ingreso de mercanciá</h2>
+            </div>
+            <div class="inside">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="mtop16">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success"
+                                    title="Registrar nuevo ingreso de mercanciá.">Registrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

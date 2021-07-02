@@ -1,0 +1,68 @@
+{% block js %}
+<script>
+    function eliminarColeccion(uuid) {
+        console.log(uuid)
+        Swal.fire({
+            "title": "¿Esta seguro?",
+            "text": "Esta acción no se puede deshacer.",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonTest": "Si, Eliminar",
+            "reverseButtons": true
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "/marca/colecciones/eliminar/" + uuid + "/"
+                } else {
+                    Swal.fire({
+                        "title": "Ok",
+                        "text": "Su registro está seguro",
+                        "icon": "success"
+                    })
+                }
+            })
+    }
+</script>
+{% endblock %}
+<div class="panel shadow">
+    <div class="header">
+        <h2 class="title">
+            <i class="fas fa-boxes"></i> Colecciones
+        </h2>
+    </div>
+    <div class="inside">
+        <table class="table table-fixed table-fixed-601">
+            <thead>
+                <tr style="width: 821px;">
+                    <th style="width: 246px;">Nombre</th>
+                    <th style="width: 460px;">Descripción</th>
+                    <th style="width: 115px;">*</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coleccion in colecciones%}
+                <tr style="width: 806px;">
+                    <td style="width: 246px;"><i class="{{ coleccion.icono }}"></i> {{ coleccion.nombre }}</td>
+                    <td style="width: 460px;">
+                        {{ coleccion.descripcion }}
+                    </td>
+                    <td style="width: 100px;">
+                        <div class="opts-table">
+                            <a href="{% url 'admin_coleccion_modificar' coleccion.uuid %}" data-toggle="tooltip"
+                                data-placement="top" title="Modificar registro">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            &nbsp;
+                            <a onclick="eliminarColeccion('{{ coleccion.uuid }}')" data-toggle="tooltip"
+                                data-placement="top" title="Eliminar registro">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

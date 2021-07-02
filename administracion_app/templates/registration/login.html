@@ -1,0 +1,37 @@
+{% extends 'tienda_app/base.html' %}
+{% load crispy_forms_tags %}
+{% block contenedor %}
+<br><br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="panel shadow">
+                        <div class="container-fluid">
+                            <div class="header">
+                                <i class="fas fa-key"></i>
+                                <h2 class="title"> Ingresa tus credenciales</h2>
+                            </div>
+                        </div>
+                        <div class="inside">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ form | crispy }}
+                                <div class="mtop16">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-success"
+                                                title="Ingresar al sistema">Ingresar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

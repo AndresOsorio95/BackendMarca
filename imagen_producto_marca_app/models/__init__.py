@@ -1,0 +1,1 @@
+from .imagen_producto_marca import ImagenProductoMarca

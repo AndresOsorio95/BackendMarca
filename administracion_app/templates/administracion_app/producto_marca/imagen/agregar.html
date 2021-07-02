@@ -1,0 +1,34 @@
+{% extends 'administracion_app/producto_marca/base.html' %}
+{% load crispy_forms_tags %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_producto_bodega_marca_agregar_imagen' producto_marca.uuid %}">
+    <i class="far fa-images"></i> Imagenes asociadas/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-3">{% include 'administracion_app/producto_marca/producto/producto_marca.html' %}</div>
+    <div class="col-md-9">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title"><i class="far fa-image"></i> Agregar imagen</h2>
+            </div>
+            <div class="inside">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="mtop16">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success"
+                                    title="Agregar imagen de producto.">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% include 'administracion_app/producto_marca/imagen/listar.html' %}
+    </div>
+</div>
+{% endblock %}

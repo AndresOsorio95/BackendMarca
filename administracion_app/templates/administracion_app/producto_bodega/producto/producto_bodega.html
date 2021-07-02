@@ -1,0 +1,25 @@
+{% load humanize %}
+<div class="card panel shadow">
+    <div class="card-header">
+        <i class="fas fas fa-dolly"></i> {{producto_bodega.nombre}}
+        <p>Ref: {{producto_bodega.referencia}}</p>
+    </div>
+    <div class="card-body">
+        <h5>Bodega:</h5>
+        <p>{{producto_bodega.bodega}}</p>
+        <h5>Proveedor:</h5>
+        <p>{{producto_bodega.proveedor}}</p>
+        <h5>Costo:</h5>
+        <p>${{producto_bodega.costo | intcomma}}</p>
+        <h5>Costo de unidad:</h5>
+        <p>${{producto_bodega.costo_unitario | intcomma}}</p>
+        <h5>Cantidad ingresada:</h5>
+        <p>{{producto_bodega.cantidad_entra}} Unds.</p>
+        <h5>Cantidad disponible:</h5>
+        <p>{{producto_bodega.cantidad_disponible}} Unds.</p>
+        <h5>Cantidad minima permitida:</h5>
+        <p>{{producto_bodega.cantidad_minima}} Unds.</p>
+        <h5>Descripcion:</h5>
+        <p>{{producto_bodega.descripcion}}</p>
+    </div>
+</div>

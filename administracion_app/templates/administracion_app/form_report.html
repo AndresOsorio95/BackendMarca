@@ -1,0 +1,10 @@
+<form method="GET">
+    <div id="sustom-search-imput">
+        <label class="title">Rango de fechas:</label>
+        <div class="input-group mb-3">
+            {% csrf_token %}
+            {{ form.date_range }}
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+        </div>
+    </div>
+</form>

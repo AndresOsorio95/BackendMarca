@@ -1,0 +1,35 @@
+{% extends 'administracion_app/coleccion/base.html' %}
+{% load crispy_forms_tags %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_coleccion_agregar' %}">
+    <i class="fas fa-plus"></i> Agregar nueva coleccion/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title"><i class="fas fa-plus"></i> Agregar Colección</h2>
+            </div>
+            <div class="inside">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="mtop16">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success"
+                                    title="Agregar nueva coleccion">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        {% include 'administracion_app/coleccion/listar.html' %}
+    </div>
+</div>
+{% endblock %}

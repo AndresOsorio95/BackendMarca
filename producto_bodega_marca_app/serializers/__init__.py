@@ -1,0 +1,2 @@
+from .producto_bodega_marca import ProductoBodegaMarcaSerializer, SaveProductoBodegaMarcaSerializer, GetLiteProductoBodegaMarcaSerializer, GetShortProductoBodegaBodegaMarca
+ 

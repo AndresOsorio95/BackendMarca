@@ -1,0 +1,31 @@
+<div class="panel shadow">
+    <div class="header">
+        <h2 class="title"><i class="fas fa-tasks"></i> Detalles de mercanciá</h2>
+    </div>
+    <div class="inside content-table">
+        <table class="table  table-fixed table-fixed-600 ">
+            <thead>
+                <tr style="width: 382px;">
+                    <th style="width: 39px;">Talla</th>
+                    <th style="width: 76px;">Color</th>
+                    <th style="width: 76px;">Estado</th>
+                    <th style="width: 191px;">Informacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in detalles %}
+                <tr style="width: 377px;">
+                    <td style="width: 39px;">{{detalle.talla}}</td>
+                    <td style="width: 76px">
+                        <div class="tabla-color" style="background-color: {{detalle.color}}">
+
+                        </div>
+                    </td>
+                    <td style="width: 76px;">{{detalle.estado}}</td>
+                    <td style="width: 176px;">{{detalle.informacion}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

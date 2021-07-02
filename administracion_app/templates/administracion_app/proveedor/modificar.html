@@ -1,0 +1,32 @@
+{% extends 'administracion_app/proveedor/base.html' %}
+{% load crispy_forms_tags %}
+{% block complemento_barra_superior %}
+<a href="{% url 'admin_proveedor_modificar' proveedor.uuid %}">
+    <i class="fas fa-edit"></i> Modificar proveedor/
+</a>
+{% endblock %}
+{% block contenedor %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel shadow">
+            <div class="header">
+                <h2 class="title"><i class="fas fa-edit"></i> Modificr Proveedor</h2>
+            </div>
+            <div class="inside">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="mtop16">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success"
+                                    title="Modificar proveedor">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
